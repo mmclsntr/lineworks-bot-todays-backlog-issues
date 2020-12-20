@@ -1,0 +1,9 @@
+{
+  "name": "lineworks-bot-backlog-tasks",
+  "description": "",
+  "version": "0.1.0",
+  "dependencies": {
+    "serverless-python-requirements": "^5.1.0"
+  },
+  "devDependencies": {}
+}

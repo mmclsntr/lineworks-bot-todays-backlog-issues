@@ -1,0 +1,14 @@
+boto3
+certifi
+cffi
+chardet
+cryptography
+idna
+jmespath
+pycparser
+PyJWT
+python-dateutil
+requests
+six
+urllib3
+pybacklogpy

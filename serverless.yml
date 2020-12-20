@@ -1,0 +1,32 @@
+service: lineworks-backlog-issues
+
+custom:
+  pythonRequirements:
+    dockerizePip: true
+
+provider:
+  name: aws
+  runtime: python3.7
+  region: us-west-1
+  timeout: 30
+  iamManagedPolicies:
+    - 'arn:aws:iam::aws:policy/AmazonSSMFullAccess'
+    - 'arn:aws:iam::aws:policy/AWSLambdaExecute'
+
+functions:
+  update-token:
+    handler: lambda_functions.update_token_handler
+    events:
+      - schedule: rate(12 hours)
+
+  push-todays-backlog-issues:
+    handler: lambda_functions.push_todays_backlog_issues
+    environment:
+      LW_BOTNO: ${env:LW_BOTNO}
+      LW_ACCOUNT_ID: ${env:LW_ACCOUNT_ID}
+      BL_USER_ID: ${env:BL_USER_ID}
+    events:
+      - schedule: cron(0 0 * * ? *)
+
+plugins:
+  - serverless-python-requirements
